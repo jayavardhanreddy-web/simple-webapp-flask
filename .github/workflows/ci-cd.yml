@@ -6,8 +6,7 @@ on:
       - main
   schedule:
     - cron: '0 0 * * *'  
-    
-  workflow_dispatch:  
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -34,20 +33,20 @@ jobs:
           tags: reginecyrille/flask-web-app:latest
 
       - name: Trivy scan
-        uses: aquasecurity/trivy-action@v0.24.0
+        uses: aquasecurity/trivy-action@v0.24.0 
         with:
           image-ref: reginecyrille/flask-web-app:latest
           format: 'table'
           exit-code: '1'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
 
       - name: Run Trivy vulnerability scanner and create GitHub issues
         uses: knqyf263/trivy-issue-action@v0.0.6
         with:
-          assignee: regine-12 # 
-          severity: CRITICAL  # 
-          skip-dirs: integration,examples,pkg  
+          assignee: regine12  
+          severity: CRITICAL  
+          skip-dirs: integration,examples,pkg 
           label: kind/security
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
