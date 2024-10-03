@@ -29,6 +29,9 @@ jobs:
           push: true
           tags: reginecyrille/flask-web-app:latest
 
+      - name: Set output
+        run: echo "output_name=value" >> $GITHUB_ENV
+
       - name: Trivy scan
         uses: aquasecurity/trivy-action@master
         with:
