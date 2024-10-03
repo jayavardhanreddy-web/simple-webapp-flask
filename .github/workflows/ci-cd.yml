@@ -34,7 +34,7 @@ jobs:
           tags: reginecyrille/flask-web-app:latest
 
       - name: Trivy scan
-        uses: aquasecurity/trivy-action@v4 
+        uses: aquasecurity/trivy-action@v0.24.0
         with:
           image-ref: reginecyrille/flask-web-app:latest
           format: 'table'
