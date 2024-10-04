@@ -33,7 +33,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/flask-web-app:latest  # Tag the image with 'latest' for the DockerHub repo
 
       - name: Trivy scan for vulnerabilities  # Step 5: Run Trivy to scan the built image for vulnerabilities
-        uses: aquasecurity/trivy-action@v0.29.2  # Use the stable v0.29.2 Trivy action from Aqua Security
+        uses: aquasecurity/trivy-action@v0.20.0  # Use the stable v0.29.2 Trivy action from Aqua Security
         with:
           image-ref: ${{ secrets.DOCKER_USERNAME }}/flask-web-app:latest  # Specify the image to scan (your built Docker image)
           format: 'table'  # Set the scan output format to 'table' for readability
@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Trivy scan  # Run Trivy in the test job to scan the Docker image
-        uses: aquasecurity/trivy-action@v0.29.2
+        uses: aquasecurity/trivy-action@v0.20.0
         with:
           image-ref: ${{ secrets.DOCKER_USERNAME }}/flask-web-app:latest  # Use the image built in the 'build' job
           format: 'table'  # Output the scan in table format
