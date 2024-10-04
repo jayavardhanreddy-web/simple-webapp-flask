@@ -1,5 +1,17 @@
-FROM ubuntu:20.04
-RUN apt-get update && apt-get install -y python3 python3-pip
-RUN pip3 install flask
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+# Set the working directory inside the container
+WORKDIR /opt
+
+# Copy app.py into the container
 COPY app.py /opt/
-ENTRYPOINT FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080
+
+# Install Flask using pip
+RUN pip install flask
+
+# Expose port 8080 to allow external access
+EXPOSE 8080
+
+# Run the Flask application
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8080"]
