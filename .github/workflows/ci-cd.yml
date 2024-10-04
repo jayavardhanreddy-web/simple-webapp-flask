@@ -58,10 +58,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test  # This job will run only if the 'test' job passes
-
-    steps:
-      - name: Deploy to Kubernetes  # Placeholder for Kubernetes deployment steps
-        # Add your steps here to deploy the Docker image to Kubernetes (if applicable)
+  # Comment out or update the deploy job if you don't have a deployment process yet
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: test  # This job will run only if the 'test' job passes
+  #
+  #   steps:
+  #     - name: Deploy to Kubernetes  # Placeholder for Kubernetes deployment steps
+  #       # Add your steps here to deploy the Docker image to Kubernetes (if applicable)
