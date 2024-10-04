@@ -55,10 +55,10 @@ jobs:
     needs: build
 
     steps:
-      - name: Checkout code  # Checkout the repository for the test job
+      - name: Checkout code  # Step 1: Checkout the repository for the test job
         uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scan again  # Step 2: Run another Trivy scan in test phase if needed
+      - name: Run Trivy vulnerability scan again  # Step 2: Run another Trivy scan in test phase
         uses: aquasecurity/trivy-action@0.20.0
         with:
           image-ref: 'docker.io/${{ secrets.DOCKER_USERNAME }}/flask-web-app:${{ github.sha }}'
@@ -67,3 +67,9 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+
+      - name: Fail the workflow if vulnerabilities are found  # Step 3: Ensure the job fails if vulnerabilities are found
+        if: ${{ steps.trivy.outputs.vulnerability_count > 0 }}
+        run: |
+          echo "Vulnerabilities found in image, failing the workflow."
+          exit 1
