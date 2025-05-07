@@ -1,43 +1,97 @@
-# Simple Web Application
 
-This is a simple web application using [Python Flask](http://flask.pocoo.org/) and [MySQL](https://www.mysql.com/) database. 
-This is used in the demonstration of the development of Ansible Playbooks.
-  
-  Below are the steps required to get this working on a base linux system.
-  
-  - **Install all required dependencies**
-  - **Install and Configure Web Server**
-  - **Start Web Server**
-   
-## 1. Install all required dependencies
-  
-  Python and its dependencies
-  ```bash
-  apt-get install -y python3 python3-setuptools python3-dev build-essential python3-pip default-libmysqlclient-dev
-  ```
-   
-## 2. Install and Configure Web Server
+# Simple Flask MySQL Web Application
 
-Install Python Flask dependency
+This is a simple Python Flask web application that connects to a MySQL database. It was originally built for demonstrating Ansible Playbook automation but has now been enhanced to support modern DevOps practices.
+
+---
+
+## 🚀 Features
+
+- Python Flask-based Web App
+- MySQL Database Integration
+- Docker Support
+- Kubernetes Manifests with HPA (Horizontal Pod Autoscaler)
+- Monitoring with Prometheus & Grafana
+- Slack Notification Integration
+
+---
+
+## 🛠️ Setup Instructions
+
+### 1. Install Required Dependencies (For Bare Metal)
+
 ```bash
-pip3 install flask
-pip3 install flask-mysql
+apt-get install -y python3 python3-setuptools python3-dev build-essential python3-pip default-libmysqlclient-dev
 ```
 
-- Copy `app.py` or download it from a source repository
-- Configure database credentials and parameters 
+### 2. Install Python Libraries
 
-## 3. Start Web Server
-
-Start web server
 ```bash
-FLASK_APP=app.py flask run --host=0.0.0.0
+pip3 install flask flask-mysql
 ```
 
-## 4. Test
+---
 
-Open a browser and go to URL
+## 🐳 Docker Support
+
+Build the Docker image:
+
+```bash
+docker build -t flask-mysql-app:latest .
+```
+
+Run the container:
+
+```bash
+docker run -p 5000:5000 flask-mysql-app:latest
+```
+
+---
+
+## ☸️ Kubernetes Deployment
+
+This project includes Kubernetes manifests for:
+
+- App Deployment & Service
+- MySQL Deployment & Service
+- HPA (Horizontal Pod Autoscaler)
+- Monitoring (Prometheus & Grafana)
+- Slack Alerts
+
+Apply manifests:
+
+```bash
+kubectl apply -f k8s/
+```
+
+---
+
+## 📊 Monitoring & Alerts
+
+- Prometheus scrapes metrics from Flask app and Kubernetes nodes.
+- Grafana dashboard is included.
+- Slack alerts configured via Alertmanager.
+
+---
+
+## 🧪 Testing the Application
+
+Open a browser and access:
+
 ```
 http://<IP>:5000                            => Welcome
 http://<IP>:5000/how%20are%20you            => I am good, how about you?
 ```
+
+---
+
+## 🤝 Contributing
+
+Feel free to fork the repo, raise PRs, and enhance it further.
+
+---
+
+## 📬 Stay Connected
+
+For contributions, feedback, or collaboration, connect with me on [LinkedIn](https://www.linkedin.com/in/aakash-sharma-8937b81aa/).
+
